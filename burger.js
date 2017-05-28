@@ -94,11 +94,16 @@ Burger.prototype.hasSauce = function(sauce){
 
 Burger.prototype.burger = function(){
  var toppings = '';
- if(this.formatToppings() != ''){
-    toppings = _.template(' with ${toppings}')({toppings: this.formatToppings()});
+ if(this.formatAdditions(_toppings) != ''){
+    toppings = _.template(' topped with ${toppings}')({toppings: this.formatAdditions(_toppings)});
  };
 
- var burger = _.template('A ${double}${bacon}${cheese}burger${toppings}')({double: this.isADouble() ? 'double ': null, bacon: this.hasBacon() ? 'bacon ' : null, cheese: this.hasCheese() ? 'cheese' : null, toppings: toppings});
+ var sauces = '';
+ if(this.formatAdditions(_sauces) != ''){
+     sauces = _.template(' with ${sauces}')({sauces: this.formatAdditions(_sauces)});
+ }
+
+ var burger = _.template('A ${double}${bacon}${cheese}burger${toppings}${sauces}')({double: this.isADouble() ? 'double ': null, bacon: this.hasBacon() ? 'bacon ' : null, cheese: this.hasCheese() ? 'cheese' : null, toppings: toppings, sauces: sauces});
 
  return burger;
 };
@@ -117,33 +122,34 @@ Burger.prototype.reset = function(){
     }
 };
 
-Burger.prototype.formatToppings = function(){
-    var toppingsString = '';
-    var toppings = [];
-    for(var topping in _toppings){
-        if(_toppings[topping]){
-            toppings.push(topping);
+Burger.prototype.formatAdditions = function(additionObj){
+    var additionsString = '';
+    var additions = [];
+    
+    for(var addition in additionObj){
+        if(additionObj[addition]){
+            additions.push(addition);
         }
     }
 
-    switch(toppings.length){
+    switch(additions.length){
         case 0:
             break;
         case 1:
-            toppingsString += toppings[0];
+            additionsString += additions[0];
             break;
         case 2:
-            toppingsString += toppings[0] + ' and ' + toppings[1];
+            additionsString += additions[0] + ' and ' + additions[1];
             break;
         default:
-            for(var i = 0; i < toppings.length - 1; i++){
-                toppingsString += toppings[i] + ', ';
+            for(var i = 0; i < additions.length - 1; i++){
+                additionsString += additions[i] + ', ';
             }
-            toppingsString += 'and ' + toppings[toppings.length - 1];
+            additionsString += 'and ' + additions[additions.length - 1];
     }
-
-    return toppingsString;
+    return additionsString;
 };
+
 
 
 module.exports = Burger;

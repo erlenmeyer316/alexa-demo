@@ -71,7 +71,6 @@ describe('Burger', function(){
     describe('#GetAvailableSauces', function(){
         context('list available sauces', function(){
             it('returns all available sauces', function(){
-                console.log(subject.availableSauces());
                 expect(subject.availableSauces().toString()).to.eq(['Papa Sauce','Spicy Papa','Spicy Ketchup','Mayo','Ketchup','Mustard'].toString());
             });
         });
@@ -80,7 +79,6 @@ describe('Burger', function(){
     describe('#GetAvailableToppings', function(){
         context('list available toppings', function(){
             it('returns all available toppings', function(){
-                console.log(subject.availableToppings());
                 expect(subject.availableToppings().toString()).to.eq(['Lettuce','Pickles','Tomato','Onion','Jalapeño Peppers','Grilled Mushrooms','Grilled Onions'].toString());
             });
         });
@@ -235,7 +233,6 @@ describe('Burger', function(){
         context('Plain Burger', function(){
             it('Describes a plain burger', function(){
                 subject.reset();
-                console.log(subject.burger());
                 expect(subject.burger()).to.eq('A burger');
             });
         });
@@ -243,7 +240,6 @@ describe('Burger', function(){
             it('Describes a cheeseburger', function(){
                 subject.reset();
                 subject.addCheese();
-                console.log(subject.burger());
                 expect(subject.burger()).to.eq('A cheeseburger');
             });
         });
@@ -252,7 +248,7 @@ describe('Burger', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.addBacon();
-                console.log(subject.burger());
+
                 expect(subject.burger()).to.eq('A bacon cheeseburger');
             });
         });
@@ -262,7 +258,6 @@ describe('Burger', function(){
                 subject.addCheese();
                 subject.addBacon();
                 subject.makeItADouble();
-                console.log(subject.burger());
                 expect(subject.burger()).to.eq('A double bacon cheeseburger');
             });
         });
@@ -271,43 +266,41 @@ describe('Burger', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
-                console.log(subject.burger());
                 expect(subject.burger()).to.eq('A double cheeseburger');
             });
         });
         context('Double Cheeseburger with 1 Topping', function(){
-            it('Describes a double cheeseburger with onion', function(){
+            it('Describes a double cheeseburger topped with onion', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
                 subject.addTopping('Onion');
-                console.log(subject.burger());
-                expect(subject.burger()).to.eq('A double cheeseburger with Onion');
+                expect(subject.burger()).to.eq('A double cheeseburger topped with Onion');
             });
         });
         context('Double Cheeseburger with 2 Toppings', function(){
-            it('Describes a double cheeseburger with onion & jalapeno peppers', function(){
+            it('Describes a double cheeseburger topped with onion & jalapeno peppers', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
                 subject.addTopping('Onion');
                 subject.addTopping('Jalapeño Peppers')
-                expect(subject.burger()).to.eq('A double cheeseburger with Onion and Jalapeño Peppers');
+                expect(subject.burger()).to.eq('A double cheeseburger topped with Onion and Jalapeño Peppers');
             });
         });
         context('Double Cheeseburger with 3 Toppings', function(){
-            it('Describes a double cheeseburger with onion & jalapeno peppers', function(){
+            it('Describes A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
                 subject.addTopping('Onion');
                 subject.addTopping('Jalapeño Peppers')
                 subject.addTopping('Tomato');
-                expect(subject.burger()).to.eq('A double cheeseburger with Tomato, Onion, and Jalapeño Peppers');
+                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers');
             });
         });
         context('Double Cheeseburger with 4 Toppings', function(){
-            it('Describes a double cheeseburger with onion & jalapeno peppers', function(){
+            it('Describes A double cheeseburger topped with Tomato, Onion, Jalapeño Peppers, and Grilled Mushrooms', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
@@ -315,7 +308,62 @@ describe('Burger', function(){
                 subject.addTopping('Jalapeño Peppers')
                 subject.addTopping('Tomato');
                 subject.addTopping('Grilled Mushrooms');
-                expect(subject.burger()).to.eq('A double cheeseburger with Tomato, Onion, Jalapeño Peppers, and Grilled Mushrooms');
+                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, Jalapeño Peppers, and Grilled Mushrooms');
+            });
+        });
+        context('Double Cheeseburger with 1 sauce', function(){
+            it('A double cheeseburger with Papa Sauce', function(){
+                subject.reset();
+                subject.addCheese();
+                subject.makeItADouble();
+                subject.addSauce('Papa Sauce');
+                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce');
+            });
+        });
+       context('Double Cheeseburger with 2 sauces', function(){
+            it('A double cheeseburger with Papa Sauce and Mayo', function(){
+                subject.reset();
+                subject.addCheese();
+                subject.makeItADouble();
+                subject.addSauce('Papa Sauce');
+                subject.addSauce('Mayo');
+                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce and Mayo');
+            });
+        });
+        context('Double Cheeseburger with 3 sauces', function(){
+            it('A double cheeseburger with Papa Sauce, Mayo, and Ketchup', function(){
+                subject.reset();
+                subject.addCheese();
+                subject.makeItADouble();
+                subject.addSauce('Papa Sauce');
+                subject.addSauce('Mayo');
+                subject.addSauce('Ketchup');
+                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce, Mayo, and Ketchup');
+            });
+        });
+        context('Double Cheeseburger with 4 sauces', function(){
+            it('A double cheeseburger with Papa Sauce, Mayo, and Ketchup', function(){
+                subject.reset();
+                subject.addCheese();
+                subject.makeItADouble();
+                subject.addSauce('Papa Sauce');
+                subject.addSauce('Mayo');
+                subject.addSauce('Ketchup');
+                subject.addSauce('Mustard');
+                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce, Mayo, Ketchup, and Mustard');
+            });
+        });
+        context('Double Cheeseburger with 3 Toppings and 2 Sauces', function(){
+            it('A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers with Papa Sauce and Mayo', function(){
+                subject.reset();
+                subject.addCheese();
+                subject.makeItADouble();
+                subject.addTopping('Onion');
+                subject.addTopping('Jalapeño Peppers')
+                subject.addTopping('Tomato');
+                subject.addSauce('Papa Sauce');
+                subject.addSauce('Mayo');
+                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers with Papa Sauce and Mayo');
             });
         });
     });
