@@ -3,15 +3,15 @@ var _ = require('lodash');
 var Burger = require('./burger');
 var RandomHelper = require('./random_helper');
 
-var AWBurger = new Burger(); 
-var randomHelper = new RandomHelper();  
+function AWBurgerBuilder(){};
 
-function AWBurgerBuilder(){
-     
-};
+//#PROPERTIES
+AWBurgerBuilder.prototype.AWBurger = new Burger();
+AWBurgerBuilder.prototype.randomHelper = new RandomHelper();
 
+//#METHODS
 AWBurgerBuilder.prototype.formatBurger = function(){
- var burger = AWBurger.toJson();
+ var burger = this.AWBurger.toJson();
 
  var toppings = '';
  if(this.formatAdditions(burger['toppings']) != ''){
@@ -28,13 +28,6 @@ AWBurgerBuilder.prototype.formatBurger = function(){
 
 AWBurgerBuilder.prototype.formatAdditions = function(additions){
     var additionsString = '';
-    //var additions = [];
-    
-    /*for(var addition in additionObj){
-        if(additionObj[addition]){
-            additions.push(addition);
-        }
-    }*/
 
     switch(additions.length){
         case 0:
@@ -55,38 +48,57 @@ AWBurgerBuilder.prototype.formatAdditions = function(additions){
 };
 
 AWBurgerBuilder.prototype.randomBurger = function(){
-    AWBurger.reset();
-    if(randomHelper.FiftyFifty()){
-        AWBurger.addCheese();
+    this.AWBurger.reset();
+    if(this.randomHelper.FiftyFifty()){
+        this.addCheese();
     }
 
-    if(randomHelper.FiftyFifty()){
-        AWBurger.addBacon();
+    if(this.randomHelper.FiftyFifty()){
+        this.addBacon();
     }
 
-    if(randomHelper.FiftyFifty()){
-        AWBurger.makeItADouble();
+    if(this.randomHelper.FiftyFifty()){
+        this.makeItADouble();
     }
 
-    var numberOfSauces = randomHelper.RandomNumber(0, AWBurger.availableSauces().length);
+    var numberOfSauces = this.randomHelper.RandomNumber(0, this.AWBurger.availableSauces().length);
     if(numberOfSauces > 0){
-        var randomSauces = randomHelper.NonRepeatingRandom(0, AWBurger.availableSauces().length - 1, numberOfSauces);
+        var randomSauces = this.randomHelper.NonRepeatingRandom(0, this.AWBurger.availableSauces().length - 1, numberOfSauces);
         for(var index in randomSauces){
-            //console.log(AWBurger.availableSauces()[index]);
-            AWBurger.addSauce(AWBurger.availableSauces()[index]);
+            this.addSauce(this.AWBurger.availableSauces()[index]);
         }
     }
 
-    var numberOfToppings = randomHelper.RandomNumber(0, AWBurger.availableToppings().length);
+    var numberOfToppings = this.randomHelper.RandomNumber(0, this.AWBurger.availableToppings().length);
     if(numberOfToppings > 0){
-        var randomToppings = randomHelper.NonRepeatingRandom(0, AWBurger.availableToppings().length - 1, numberOfToppings);
+        var randomToppings = this.randomHelper.NonRepeatingRandom(0, this.AWBurger.availableToppings().length - 1, numberOfToppings);
         for(var index in randomToppings){
-            //console.log(AWBurger.availableToppings()[index]);
-            AWBurger.addTopping(AWBurger.availableToppings()[index]);
+            this.addTopping(this.AWBurger.availableToppings()[index]);
         }
     }
 
     return this.formatBurger();
+};
+
+//#WRAPPER FUNCTIONS FOR BURGER
+AWBurgerBuilder.prototype.addCheese = function(){
+    this.AWBurger.addCheese();
+};
+
+AWBurgerBuilder.prototype.addBacon = function(){
+    this.AWBurger.addBacon();
+};
+
+AWBurgerBuilder.prototype.makeItADouble = function(){
+    this.AWBurger.makeItADouble();
+};
+
+AWBurgerBuilder.prototype.addSauce = function(sauce){
+    this.AWBurger.addSauce(sauce);
+};
+
+AWBurgerBuilder.prototype.addTopping = function(topping){
+    this.AWBurger.addTopping(topping);
 };
 
 
