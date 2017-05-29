@@ -92,22 +92,6 @@ Burger.prototype.hasSauce = function(sauce){
     return false;
 };
 
-Burger.prototype.burger = function(){
- var toppings = '';
- if(this.formatAdditions(_toppings) != ''){
-    toppings = _.template(' topped with ${toppings}')({toppings: this.formatAdditions(_toppings)});
- };
-
- var sauces = '';
- if(this.formatAdditions(_sauces) != ''){
-     sauces = _.template(' with ${sauces}')({sauces: this.formatAdditions(_sauces)});
- }
-
- var burger = _.template('A ${double}${bacon}${cheese}burger${toppings}${sauces}')({double: this.isADouble() ? 'double ': null, bacon: this.hasBacon() ? 'bacon ' : null, cheese: this.hasCheese() ? 'cheese' : null, toppings: toppings, sauces: sauces});
-
- return burger;
-};
-
 Burger.prototype.reset = function(){
     _double = false;
     _bacon = false;
@@ -122,32 +106,28 @@ Burger.prototype.reset = function(){
     }
 };
 
-Burger.prototype.formatAdditions = function(additionObj){
-    var additionsString = '';
-    var additions = [];
+Burger.prototype.toJson = function(){
+    var selectedToppings = [];
+    for(var topping in _toppings){
+        if(_toppings[topping]){
+            selectedToppings.push(topping);
+        }
+    }
     
-    for(var addition in additionObj){
-        if(additionObj[addition]){
-            additions.push(addition);
+    var selectedSauces = [];
+    for(var sauce in _sauces){
+        if(_sauces[sauce]){
+            selectedSauces.push(sauce);
         }
     }
 
-    switch(additions.length){
-        case 0:
-            break;
-        case 1:
-            additionsString += additions[0];
-            break;
-        case 2:
-            additionsString += additions[0] + ' and ' + additions[1];
-            break;
-        default:
-            for(var i = 0; i < additions.length - 1; i++){
-                additionsString += additions[i] + ', ';
-            }
-            additionsString += 'and ' + additions[additions.length - 1];
+    return {
+        'double': _double,
+        'bacon': _bacon,
+        'cheese': _cheese,
+        'toppings': selectedToppings,
+        'sauces': selectedSauces
     }
-    return additionsString;
 };
 
 

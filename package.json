@@ -1,7 +1,6 @@
 {
   "name": "alexa-demo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -15,5 +14,20 @@
   "bugs": {
     "url": "https://github.com/erlenmeyer316/alexa-demo/issues"
   },
-  "homepage": "https://github.com/erlenmeyer316/alexa-demo"
+  "homepage": "https://github.com/erlenmeyer316/alexa-demo",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "alexa-app": "^4.0.1",
+    "chai": "3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "lodash": "^4.17.4",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "unique-random": "^1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
 }

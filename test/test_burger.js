@@ -71,7 +71,7 @@ describe('Burger', function(){
     describe('#GetAvailableSauces', function(){
         context('list available sauces', function(){
             it('returns all available sauces', function(){
-                expect(subject.availableSauces().toString()).to.eq(['Papa Sauce','Spicy Papa','Spicy Ketchup','Mayo','Ketchup','Mustard'].toString());
+                expect(subject.availableSauces()).to.deep.equal(['Papa Sauce','Spicy Papa','Spicy Ketchup','Mayo','Ketchup','Mustard']);
             });
         });
     });
@@ -79,7 +79,7 @@ describe('Burger', function(){
     describe('#GetAvailableToppings', function(){
         context('list available toppings', function(){
             it('returns all available toppings', function(){
-                expect(subject.availableToppings().toString()).to.eq(['Lettuce','Pickles','Tomato','Onion','Jalapeño Peppers','Grilled Mushrooms','Grilled Onions'].toString());
+                expect(subject.availableToppings()).to.deep.equal(['Lettuce','Pickles','Tomato','Onion','Jalapeño Peppers','Grilled Mushrooms','Grilled Onions']);
             });
         });
     });
@@ -233,14 +233,14 @@ describe('Burger', function(){
         context('Plain Burger', function(){
             it('Describes a plain burger', function(){
                 subject.reset();
-                expect(subject.burger()).to.eq('A burger');
+                expect(subject.toJson()).to.deep.equal({'double': false, 'bacon': false, 'cheese': false, 'toppings': [], 'sauces':[]});
             });
         });
         context('Cheeseburger', function(){
             it('Describes a cheeseburger', function(){
                 subject.reset();
                 subject.addCheese();
-                expect(subject.burger()).to.eq('A cheeseburger');
+                expect(subject.toJson()).to.deep.equal({'double': false, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':[]});
             });
         });
         context('Bacon Cheeseburger', function(){
@@ -248,8 +248,7 @@ describe('Burger', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.addBacon();
-
-                expect(subject.burger()).to.eq('A bacon cheeseburger');
+                expect(subject.toJson()).to.deep.equal({'double': false, 'bacon': true, 'cheese': true, 'toppings': [], 'sauces':[]});
             });
         });
         context('Double Bacon Cheeseburger', function(){
@@ -258,7 +257,7 @@ describe('Burger', function(){
                 subject.addCheese();
                 subject.addBacon();
                 subject.makeItADouble();
-                expect(subject.burger()).to.eq('A double bacon cheeseburger');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': true, 'cheese': true, 'toppings': [], 'sauces':[]});
             });
         });
         context('Double Cheeseburger', function(){
@@ -266,7 +265,7 @@ describe('Burger', function(){
                 subject.reset();
                 subject.addCheese();
                 subject.makeItADouble();
-                expect(subject.burger()).to.eq('A double cheeseburger');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':[]});
             });
         });
         context('Double Cheeseburger with 1 Topping', function(){
@@ -275,7 +274,7 @@ describe('Burger', function(){
                 subject.addCheese();
                 subject.makeItADouble();
                 subject.addTopping('Onion');
-                expect(subject.burger()).to.eq('A double cheeseburger topped with Onion');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': ['Onion'], 'sauces':[]});
             });
         });
         context('Double Cheeseburger with 2 Toppings', function(){
@@ -285,7 +284,7 @@ describe('Burger', function(){
                 subject.makeItADouble();
                 subject.addTopping('Onion');
                 subject.addTopping('Jalapeño Peppers')
-                expect(subject.burger()).to.eq('A double cheeseburger topped with Onion and Jalapeño Peppers');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': ['Onion', 'Jalapeño Peppers'], 'sauces':[]});
             });
         });
         context('Double Cheeseburger with 3 Toppings', function(){
@@ -296,7 +295,7 @@ describe('Burger', function(){
                 subject.addTopping('Onion');
                 subject.addTopping('Jalapeño Peppers')
                 subject.addTopping('Tomato');
-                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': ['Tomato','Onion', 'Jalapeño Peppers'], 'sauces':[]});
             });
         });
         context('Double Cheeseburger with 4 Toppings', function(){
@@ -308,7 +307,7 @@ describe('Burger', function(){
                 subject.addTopping('Jalapeño Peppers')
                 subject.addTopping('Tomato');
                 subject.addTopping('Grilled Mushrooms');
-                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, Jalapeño Peppers, and Grilled Mushrooms');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': ['Tomato','Onion', 'Jalapeño Peppers', 'Grilled Mushrooms'], 'sauces':[]});
             });
         });
         context('Double Cheeseburger with 1 sauce', function(){
@@ -317,7 +316,7 @@ describe('Burger', function(){
                 subject.addCheese();
                 subject.makeItADouble();
                 subject.addSauce('Papa Sauce');
-                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':['Papa Sauce']});
             });
         });
        context('Double Cheeseburger with 2 sauces', function(){
@@ -327,7 +326,7 @@ describe('Burger', function(){
                 subject.makeItADouble();
                 subject.addSauce('Papa Sauce');
                 subject.addSauce('Mayo');
-                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce and Mayo');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':['Papa Sauce', 'Mayo']});
             });
         });
         context('Double Cheeseburger with 3 sauces', function(){
@@ -338,7 +337,7 @@ describe('Burger', function(){
                 subject.addSauce('Papa Sauce');
                 subject.addSauce('Mayo');
                 subject.addSauce('Ketchup');
-                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce, Mayo, and Ketchup');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':['Papa Sauce', 'Mayo', 'Ketchup']});
             });
         });
         context('Double Cheeseburger with 4 sauces', function(){
@@ -350,7 +349,7 @@ describe('Burger', function(){
                 subject.addSauce('Mayo');
                 subject.addSauce('Ketchup');
                 subject.addSauce('Mustard');
-                expect(subject.burger()).to.eq('A double cheeseburger with Papa Sauce, Mayo, Ketchup, and Mustard');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': [], 'sauces':['Papa Sauce', 'Mayo', 'Ketchup', 'Mustard']});
             });
         });
         context('Double Cheeseburger with 3 Toppings and 2 Sauces', function(){
@@ -363,7 +362,7 @@ describe('Burger', function(){
                 subject.addTopping('Tomato');
                 subject.addSauce('Papa Sauce');
                 subject.addSauce('Mayo');
-                expect(subject.burger()).to.eq('A double cheeseburger topped with Tomato, Onion, and Jalapeño Peppers with Papa Sauce and Mayo');
+                expect(subject.toJson()).to.deep.equal({'double': true, 'bacon': false, 'cheese': true, 'toppings': ['Tomato', 'Onion', 'Jalapeño Peppers'], 'sauces':['Papa Sauce', 'Mayo']});
             });
         });
     });
