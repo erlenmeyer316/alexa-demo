@@ -1,5 +1,4 @@
 'use strict';
-var _ = require('lodash');
 
 var _double = false;
 var _bacon = false;
@@ -53,6 +52,20 @@ Burger.prototype.addSauce = function(sauce){
     return false;
 };
 
+Burger.prototype.reset = function(){
+    _double = false;
+    _bacon = false;
+    _cheese = false;
+
+    for(var i in this.availableSauces()){
+        _sauces[this.availableSauces()[i]] = false;
+    }
+
+    for(var i in this.availableToppings()){
+        _toppings[this.availableToppings()[i]] = false;
+    }
+};
+
 /*Getters*/
 Burger.prototype.isADouble = function(){
     return _double;
@@ -90,20 +103,6 @@ Burger.prototype.hasSauce = function(sauce){
         return _sauces[sauce];
     }
     return false;
-};
-
-Burger.prototype.reset = function(){
-    _double = false;
-    _bacon = false;
-    _cheese = false;
-
-    for(var i in this.availableSauces()){
-        _sauces[this.availableSauces()[i]] = false;
-    }
-
-    for(var i in this.availableToppings()){
-        _toppings[this.availableToppings()[i]] = false;
-    }
 };
 
 Burger.prototype.toJson = function(){

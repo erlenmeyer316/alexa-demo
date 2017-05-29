@@ -13,6 +13,7 @@ describe('Burger', function(){
    
     describe('#InitialBurgerValues', function(){
         context('initial burger values', function(){
+            
             it('Double is set to false', function(){
                 expect(subject.isADouble()).to.eq(false);
             });
@@ -24,6 +25,7 @@ describe('Burger', function(){
             });
         });
         context('initial sauce values', function(){
+            
             it('Papa Sauce is false', function(){
                 expect(subject.hasSauce('Papa Sauce')).to.eq(false);
             });
