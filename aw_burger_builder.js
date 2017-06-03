@@ -9,69 +9,11 @@ var randomHelper = new RandomHelper();
 function AWBurgerBuilder() {};
 
 //#PROPERTIES
-AWBurgerBuilder.prototype.burgerLayers = 3; //cheese, bacon, make it a double
-AWBurgerBuilder.prototype.toppingLayers = AWBurger.availableToppings().length;
-AWBurgerBuilder.prototype.sauceLayers = AWBurger.availableSauces().length
+AWBurgerBuilder.prototype.burgerLayers = 0;
+AWBurgerBuilder.prototype.toppingLayers = 0;
+AWBurgerBuilder.prototype.sauceLayers = 0;
 
 //#METHODS
-AWBurgerBuilder.prototype.formatBurger = function () {
-    var burger = AWBurger.toJson();
-
-    var toppings = '';
-    if (this.formatAdditions(burger['toppings']) != '') {
-        toppings = _.template(' topped with ${toppings}')({
-            toppings: this.formatAdditions(burger['toppings'])
-        });
-    };
-
-    var sauces = '';
-    if (this.formatAdditions(burger['sauces']) != '') {
-        sauces = _.template(' with ${sauces}')({
-            sauces: this.formatAdditions(burger['sauces'])
-        });
-    }
-
-
-    var tmpl = _.template('A ${double}${bacon}${cheese}burger${toppings}${sauces}')({
-        double: burger['double'] ? 'double ' : null,
-        bacon: burger['bacon'] ? 'bacon ' : null,
-        cheese: burger['cheese'] ? 'cheese' : null,
-        toppings: toppings,
-        sauces: sauces
-    });
-
-    if(tmpl.indexOf('topped with Lettuce, Pickles, Tomato, and Onion with Papa Sauce') !== -1){
-        return _.template('A ${double}${bacon}${cheese}burger Papa Style')({
-            double: burger['double'] ? 'double ' : null,
-            bacon: burger['bacon'] ? 'bacon ' : null,
-            cheese: burger['cheese'] ? 'cheese' : null
-        });
-    } else {
-        return tmpl;
-    }
-}
-
-AWBurgerBuilder.prototype.formatAdditions = function (additions) {
-    var additionsString = '';
-
-    switch (additions.length) {
-        case 0:
-            break;
-        case 1:
-            additionsString += additions[0];
-            break;
-        case 2:
-            additionsString += additions[0] + ' and ' + additions[1];
-            break;
-        default:
-            for (var i = 0; i < additions.length - 1; i++) {
-                additionsString += additions[i] + ', ';
-            }
-            additionsString += 'and ' + additions[additions.length - 1];
-    }
-    return additionsString;
-};
-
 AWBurgerBuilder.prototype.randomBurger = function () {
     AWBurger.reset();
     if (randomHelper.FiftyFifty()) {
@@ -103,6 +45,11 @@ AWBurgerBuilder.prototype.randomBurger = function () {
     }
 
     return this.formatBurger();
+};
+
+AWBurgerBuilder.prototype.buildABurger = function(){
+    this.reset();
+    return this.NextBurgerLayer();
 };
 
 AWBurgerBuilder.prototype.NextBurgerLayer = function () {
@@ -245,6 +192,64 @@ AWBurgerBuilder.prototype.AddBurgerLayer = function (add) {
         }
     }
     //check if all layers have been filled if so restart loop return burger
+};
+
+AWBurgerBuilder.prototype.formatBurger = function () {
+    var burger = AWBurger.toJson();
+
+    var toppings = '';
+    if (this.formatAdditions(burger['toppings']) != '') {
+        toppings = _.template(' topped with ${toppings}')({
+            toppings: this.formatAdditions(burger['toppings'])
+        });
+    };
+
+    var sauces = '';
+    if (this.formatAdditions(burger['sauces']) != '') {
+        sauces = _.template(' with ${sauces}')({
+            sauces: this.formatAdditions(burger['sauces'])
+        });
+    }
+
+
+    var tmpl = _.template('A ${double}${bacon}${cheese}burger${toppings}${sauces}.')({
+        double: burger['double'] ? 'double ' : null,
+        bacon: burger['bacon'] ? 'bacon ' : null,
+        cheese: burger['cheese'] ? 'cheese' : null,
+        toppings: toppings,
+        sauces: sauces
+    });
+
+    if(tmpl.indexOf('topped with Lettuce, Pickles, Tomato, and Onion with Papa Sauce') !== -1){
+        return _.template('A ${double}${bacon}${cheese}burger Papa Style.')({
+            double: burger['double'] ? 'double ' : null,
+            bacon: burger['bacon'] ? 'bacon ' : null,
+            cheese: burger['cheese'] ? 'cheese' : null
+        });
+    } else {
+        return tmpl;
+    }
+}
+
+AWBurgerBuilder.prototype.formatAdditions = function (additions) {
+    var additionsString = '';
+
+    switch (additions.length) {
+        case 0:
+            break;
+        case 1:
+            additionsString += additions[0];
+            break;
+        case 2:
+            additionsString += additions[0] + ' and ' + additions[1];
+            break;
+        default:
+            for (var i = 0; i < additions.length - 1; i++) {
+                additionsString += additions[i] + ', ';
+            }
+            additionsString += 'and ' + additions[additions.length - 1];
+    }
+    return additionsString;
 };
 
 //#WRAPPER FUNCTIONS FOR BURGER
