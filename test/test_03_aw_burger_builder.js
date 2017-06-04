@@ -235,4 +235,112 @@ describe('AWBurgerBuilder', function(){
             });
         });
     });
+
+        describe("#BuildABurger", function(){
+        context("Guided Burger Builder (Plain", function(){
+            it('Ask cheese, add cheese', function(){
+                subject.reset();
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask bacon, add bacon', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask ask double, no double', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask lettuce, add lettuce', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask pickle, add pickle', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask tomato, add tomato', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask onion, add onion', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask jalapeño peppers, no jalapeño peppers', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask mushrooms, no mushrooms', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask grilled onion, no grilled onion', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask papa sauce, add papa sauce', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask spicy papa, no spicy papa', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask spicy ketchup, no spicy ketchup', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask mayo, no mayo', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask ketchup, no ketchup', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask mustard, no mustard', function(){
+                console.log(subject.NextBurgerLayer());
+                subject.AddBurgerLayer(false);
+                 
+                expect(true).to.be.bool;
+            });
+            it('Ask layer, return burger', function(){
+                if(subject.NextBurgerLayer() === false){
+                    console.log("You ordered a " + subject.formatBurger());
+                }
+                expect(true).to.be.bool;
+            });
+        });
+    });
 });

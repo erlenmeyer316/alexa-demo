@@ -18,7 +18,7 @@ app.intent('randomBurger', {
     },
     function(req, res){
         //var bugerBuilder = req.session('burgerBuilder');
-        res.say('You\'re burger is ' + burgerBuilder.randomBurger() + " Visit your local A&W Burger Chicken Floats restaurant to order one of your own!").send();
+        res.say('You\'re burger is ' + burgerBuilder.randomBurger() + " Visit your local A and W Burger Chicken Floats restaurant to order one of your own!").send();
         return false;
     }
 );
@@ -45,7 +45,7 @@ app.intent('AMAZON.YesIntent', {
         var prompt = burgerBuilder.NextBurgerLayer();
         if(prompt === false){
             prompt = burgerBuilder.formatBurger();
-            res.say("You ordered "+ prompt + " Visit your local A&W Burger Chicken Floats restaurant to order one of your own!").send();
+            res.say("You ordered "+ prompt + " Visit your local A and W Burger Chicken Floats restaurant to order one of your own!").send();
         } else {
             //res.session('burgerBuilder', burgerBuilder);
             res.say(prompt).reprompt(prompt).shouldEndSession(false);
@@ -63,7 +63,7 @@ app.intent('AMAZON.NoIntent', {
         var prompt = burgerBuilder.NextBurgerLayer();
         if(prompt === false){
             prompt = burgerBuilder.formatBurger();
-            res.say("You ordered "+ prompt + " Visit your local A&W Burger Chicken Floats restaurant to order one of your own!").send();
+            res.say("You ordered "+ prompt + " Visit your local A and W Burger Chicken Floats restaurant to order one of your own!").send();
         } else {
             //res.session('burgerBuilder', burgerBuilder);
             res.say(prompt).reprompt(prompt).shouldEndSession(false);

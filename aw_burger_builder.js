@@ -227,9 +227,13 @@ AWBurgerBuilder.prototype.formatBurger = function () {
             cheese: burger['cheese'] ? 'cheese' : null
         });
     } else {
-        return tmpl;
+        if(tmpl.indexOf('A burger.') !== -1){
+            return 'plain hamburger.';
+        } else {
+            return tmpl;
+        }
     }
-}
+};
 
 AWBurgerBuilder.prototype.formatAdditions = function (additions) {
     var additionsString = '';
